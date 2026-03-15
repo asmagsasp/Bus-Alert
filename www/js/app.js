@@ -701,19 +701,33 @@ function setupEventListeners() {
 
 // ---- INIT ----
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Lucide icons
-  lucide.createIcons();
+  // Safety timeout: Always hide loading after 10 seconds, no matter what
+  setTimeout(() => {
+    if (loadingScreen.style.display !== 'none') {
+      console.warn('Safety timeout: Hiding loading screen manually.');
+      hideLoading();
+    }
+  }, 10000);
 
-  // Load favorites from localStorage
-  loadFavorites();
+  try {
+    // Initialize Lucide icons
+    lucide.createIcons();
+    
+    // Load favorites from localStorage
+    loadFavorites();
 
-  // Load donation status and start timer
-  loadDonationStatus();
-  startDonationTimer();
+    // Load donation status and start timer
+    loadDonationStatus();
+    startDonationTimer();
 
-  // Set up all event listeners
-  setupEventListeners();
+    // Set up all event listeners
+    setupEventListeners();
 
-  // Initialize geolocation & map
-  initGeolocation();
+    // Initialize geolocation & map
+    initGeolocation();
+    
+  } catch (err) {
+    console.error('Critical initialization error:', err);
+    hideLoading(); // At least let the user see the app
+  }
 });
