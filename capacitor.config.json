@@ -3,7 +3,9 @@
   "appName": "Bus Alert",
   "webDir": "www",
   "server": {
-    "androidScheme": "https"
+    "androidScheme": "https",
+    "hostname": "localhost",
+    "cleartext": true
   },
   "plugins": {
     "Geolocation": {
