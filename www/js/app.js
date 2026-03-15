@@ -448,6 +448,8 @@ function loadFavorites() {
     if (saved) {
       favorites = JSON.parse(saved);
     }
+  } catch (e) {
+    console.error('Error loading favorites:', e);
   }
 }
 

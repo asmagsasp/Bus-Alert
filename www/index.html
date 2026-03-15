@@ -164,7 +164,24 @@
   <!-- Hidden file input for audio picker -->
   <input type="file" id="audio-file-input" accept="audio/*" class="hidden-input" />
 
+  <!-- Capacitor JS bridge -->
+  <script src="capacitor.js"></script>
+
   <!-- App Script -->
   <script src="js/app.js"></script>
+
+  <!-- Fail-safe: Force hide loading screen if scripts fail or take too long -->
+  <script>
+    setTimeout(function() {
+      var loader = document.getElementById('loading-screen');
+      if (loader && loader.style.display !== 'none') {
+        console.warn('Fail-safe: Force hiding loading screen after 8s');
+        loader.style.opacity = '0';
+        setTimeout(function() {
+          loader.style.display = 'none';
+        }, 500);
+      }
+    }, 8000);
+  </script>
 </body>
 </html>
