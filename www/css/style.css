@@ -129,6 +129,69 @@ html, body {
   50% { box-shadow: 0 0 0 8px rgba(59,130,246,0.1), 0 2px 8px rgba(59,130,246,0.4); }
 }
 
+/* ---- SEARCH BAR ---- */
+.search-container {
+  position: fixed;
+  top: 50px;
+  left: 20px;
+  right: 20px;
+  z-index: 150;
+  pointer-events: none;
+}
+
+.search-box {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  padding: 4px 12px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  pointer-events: auto;
+  gap: 10px;
+}
+
+.search-icon {
+  color: var(--primary);
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  background: none;
+  outline: none;
+  padding: 12px 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+.search-box input::placeholder {
+  color: var(--text-light);
+}
+
+.search-clear {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+}
+
+.search-clear svg {
+  width: 18px;
+  height: 18px;
+}
+
 /* ---- FLOATING ACTION BUTTONS ---- */
 .right-fab-container {
   position: fixed;

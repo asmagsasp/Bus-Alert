@@ -50,6 +50,8 @@ const audioFileInput = $('audio-file-input');
 const modalDonation = $('modal-donation');
 const checkDonated = $('check-donated');
 const btnCloseDonation = $('btn-close-donation');
+const inputSearch = $('input-search');
+const btnSearchClear = $('btn-search-clear');
 
 // ---- UTILITIES ----
 function getDistanceInMeters(lat1, lon1, lat2, lon2) {
@@ -630,6 +632,51 @@ function centerOnUser() {
   }
 }
 
+// ---- GEO SEARCH ----
+async function searchLocation(query) {
+  if (!query || query.length < 3) return;
+
+  try {
+    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`);
+    const data = await response.json();
+
+    if (data && data.length > 0) {
+      const result = data[0];
+      const lat = parseFloat(result.lat);
+      const lon = parseFloat(result.lon);
+
+      if (map) {
+        map.setView([lat, lon], 14, { animate: true });
+        showToast(`Buscando: ${result.display_name.split(',')[0]}`);
+      }
+    } else {
+      showToast('Local não encontrado.');
+    }
+  } catch (err) {
+    console.error('Search error:', err);
+    showToast('Erro ao buscar local.');
+  }
+}
+
+function handleSearchInput(e) {
+  if (e.target.value.length > 0) {
+    btnSearchClear.classList.remove('hidden');
+  } else {
+    btnSearchClear.classList.add('hidden');
+  }
+
+  if (e.key === 'Enter') {
+    searchLocation(e.target.value);
+    inputSearch.blur();
+  }
+}
+
+function clearSearch() {
+  inputSearch.value = '';
+  btnSearchClear.classList.add('hidden');
+  inputSearch.focus();
+}
+
 // ---- EVENT LISTENERS ----
 function setupEventListeners() {
   // Action button (start/stop)
@@ -699,6 +746,10 @@ function setupEventListeners() {
 
   // Donation Modal
   btnCloseDonation.addEventListener('click', handleDonationClose);
+
+  // Search
+  inputSearch.addEventListener('keyup', handleSearchInput);
+  btnSearchClear.addEventListener('click', clearSearch);
 }
 
 // ---- INIT ----
