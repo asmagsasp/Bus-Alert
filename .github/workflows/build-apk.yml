@@ -29,8 +29,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Sync Capacitor
-        run: npx cap sync android --verbose
+      # Sync pular temporariamente para verificar se o build Gradle passa com os arquivos commitados
+      - name: Check Capacitor Files
+        run: |
+          ls -R android/capacitor-cordova-android-plugins
+          ls -la android/app/capacitor.build.gradle
 
       - name: Cache Gradle
         uses: actions/cache@v4
