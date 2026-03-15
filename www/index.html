@@ -131,6 +131,36 @@
     </div>
   </div>
 
+  <!-- Donation Modal -->
+  <div class="modal-overlay hidden" id="modal-donation">
+    <div class="modal-content">
+      <div class="donation-header">
+        <div class="donation-icon">
+          <i data-lucide="heart"></i>
+        </div>
+        <h2 class="modal-title no-margin">Gostando do App?</h2>
+        <p class="settings-description">O Bus Alert é gratuito! Se ele te ajuda a não perder o ponto, considere apoiar o desenvolvedor com qualquer valor. ❤️</p>
+      </div>
+
+      <div class="qr-box">
+        <img src="assets/pix.png" alt="QR Code PIX" class="qr-image" />
+        <div class="pix-key-container">
+          <span class="pix-label">Chave PIX (E-mail):</span>
+          <span class="pix-key">abel.souza.magalhaes@hotmail.com</span>
+        </div>
+      </div>
+
+      <div class="donation-form">
+        <label class="checkbox-container">
+          <input type="checkbox" id="check-donated" />
+          <span class="checkbox-text">Já fiz minha doação / Não mostrar novamente</span>
+        </label>
+        
+        <button class="donation-btn" id="btn-close-donation">Continuar usando o App</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Hidden file input for audio picker -->
   <input type="file" id="audio-file-input" accept="audio/*" class="hidden-input" />
 

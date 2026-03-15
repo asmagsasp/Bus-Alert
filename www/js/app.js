@@ -16,6 +16,8 @@ let customSoundUrl = null;
 let customSoundName = null;
 let favorites = [];
 let vibrationInterval = null;
+let donatedStatus = false;
+let donationTimer = null;
 
 // Default alarm sound
 const DEFAULT_ALARM_URL = 'https://cdn.pixabay.com/audio/2022/10/14/audio_332faeeab6.mp3';
@@ -45,6 +47,9 @@ const favoriteNameInput = $('favorite-name-input');
 const favoritesList = $('favorites-list');
 const emptyFavorites = $('empty-favorites');
 const audioFileInput = $('audio-file-input');
+const modalDonation = $('modal-donation');
+const checkDonated = $('check-donated');
+const btnCloseDonation = $('btn-close-donation');
 
 // ---- UTILITIES ----
 function getDistanceInMeters(lat1, lon1, lat2, lon2) {
@@ -443,9 +448,37 @@ function loadFavorites() {
     if (saved) {
       favorites = JSON.parse(saved);
     }
-  } catch (e) {
-    console.error('Error loading favorites:', e);
   }
+}
+
+// ---- MONETIZATION / DONATION ----
+function loadDonationStatus() {
+  const saved = localStorage.getItem('@busalert_donated');
+  donatedStatus = (saved === 'true');
+}
+
+function startDonationTimer() {
+  if (donatedStatus) return;
+
+  // Set timer to show donation modal every 5 minutes (300000 ms)
+  donationTimer = setInterval(() => {
+    if (!donatedStatus) {
+      showDonationModal();
+    }
+  }, 300000);
+}
+
+function showDonationModal() {
+  modalDonation.classList.remove('hidden');
+}
+
+function handleDonationClose() {
+  if (checkDonated.checked) {
+    donatedStatus = true;
+    localStorage.setItem('@busalert_donated', 'true');
+    clearInterval(donationTimer);
+  }
+  modalDonation.classList.add('hidden');
 }
 
 function saveFavorites() {
@@ -661,6 +694,9 @@ function setupEventListeners() {
       modalSaveFavorite.classList.add('hidden');
     }
   });
+
+  // Donation Modal
+  btnCloseDonation.addEventListener('click', handleDonationClose);
 }
 
 // ---- INIT ----
@@ -670,6 +706,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Load favorites from localStorage
   loadFavorites();
+
+  // Load donation status and start timer
+  loadDonationStatus();
+  startDonationTimer();
 
   // Set up all event listeners
   setupEventListeners();
