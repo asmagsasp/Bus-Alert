@@ -14,11 +14,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Copy web assets to Android
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Capacitor Sync
         run: |
-          mkdir -p android/app/src/main/assets/public
-          cp -r www/* android/app/src/main/assets/public/
-          cp capacitor.config.json android/app/src/main/assets/capacitor.config.json
+          npx cap sync android
+          # Verificar se os arquivos gradle do cordova foram gerados
+          ls -R android/capacitor-cordova-android-plugins || echo "No cordova plugins folder"
 
       - name: Set up Java 17
         uses: actions/setup-java@v4
