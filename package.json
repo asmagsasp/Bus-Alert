@@ -1,22 +1,20 @@
 {
   "name": "bus-alert",
   "version": "1.0.0",
-  "main": "index.ts",
+  "description": "Bus Alert - Nunca mais perca a sua parada de ônibus",
+  "main": "www/index.html",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
+    "build": "echo 'Static app - no build step needed'",
+    "cap:sync": "npx cap sync android",
+    "cap:open": "npx cap open android",
+    "cap:run": "npx cap run android"
   },
   "dependencies": {
-    "expo": "~55.0.5",
-    "expo-status-bar": "~55.0.4",
-    "react": "19.2.0",
-    "react-native": "0.83.2"
-  },
-  "devDependencies": {
-    "@types/react": "~19.2.2",
-    "typescript": "~5.9.2"
-  },
-  "private": true
+    "@capacitor/android": "^8.2.0",
+    "@capacitor/cli": "^8.2.0",
+    "@capacitor/core": "^8.2.0",
+    "@capacitor/geolocation": "^8.1.0",
+    "@capacitor/haptics": "^8.0.1",
+    "@capacitor/preferences": "^8.0.1"
+  }
 }

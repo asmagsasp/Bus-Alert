@@ -1,0 +1,16 @@
+{
+  "appId": "com.asmag.busalert",
+  "appName": "Bus Alert",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "Geolocation": {
+      "androidPermissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ]
+    }
+  }
+}

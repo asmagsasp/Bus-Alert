@@ -1,15 +1,10 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
-
 # dependencies
 node_modules/
 
-# Expo
-.expo/
+# Capacitor build
 dist/
-web-build/
-expo-env.d.ts
 
-# Native
+# Native build artifacts
 .kotlin/
 *.orig.*
 *.jks
@@ -17,9 +12,6 @@ expo-env.d.ts
 *.p12
 *.key
 *.mobileprovision
-
-# Metro
-.metro-health-check*
 
 # debug
 npm-debug.*
@@ -33,9 +25,7 @@ yarn-error.*
 # local env files
 .env*.local
 
-# typescript
-*.tsbuildinfo
-
-# generated native folders
-/ios
-/android
+# Android build output (keep android/ structure but ignore build artifacts)
+android/app/build/
+android/build/
+android/.gradle/
